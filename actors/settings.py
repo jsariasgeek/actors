@@ -20,9 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'hip3ek2y*96^5)a!6cnpid$%d!d**+9e)qzu3s7k84(6p6w-=*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ['DEBUG']
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
@@ -55,12 +55,21 @@ WSGI_APPLICATION = 'actors.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'actors',
+            'USER': os.environ['LOCAL_DATABASE_USER'],
+            'PASSWORD': os.environ['LOCAL_DATABASE_PASS'],
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
     }
-}
+else:
+    #Heroku Database Settings
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config()
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -84,8 +93,6 @@ STATIC_URL = '/static/'
 
 # HEROKU settings
 
-import dj_database_url
-DATABASES['default'] = dj_database_url.config()
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
