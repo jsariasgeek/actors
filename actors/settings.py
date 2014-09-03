@@ -80,12 +80,12 @@ else:
 #         }
 # }
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    # STATIC_ROOT = 'staticfiles'
-    # STATIC_URL = '/static/'
+    STATIC_ROOT = 'staticfiles'
+    STATIC_URL = '/static/'
 
-    # STATICFILES_DIRS = (
-    #     os.path.join(BASE_DIR, 'static'),
-    # )
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )
     
     AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
     AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
