@@ -36,6 +36,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #Libraries
+    'storages',
+    'boto',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -71,13 +75,16 @@ else:
     import dj_database_url
     DATABASES['default'] = dj_database_url.config()
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    STATIC_ROOT = 'staticfiles'
-    STATIC_URL = '/static/'
+    # STATIC_ROOT = 'staticfiles'
+    # STATIC_URL = '/static/'
 
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
-    )
-
+    # STATICFILES_DIRS = (
+    #     os.path.join(BASE_DIR, 'static'),
+    # )
+    
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
