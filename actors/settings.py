@@ -37,9 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #Libraries
+    #Apps
 
-    # 'boto',
+    'app',
 
 )
 
@@ -60,7 +60,7 @@ WSGI_APPLICATION = 'actors.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-if DEBUG==True:
+if DEBUG=='True':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
